@@ -9,7 +9,7 @@ struct node {
     int key;
     node *left;
     node *right;
-	node *par;
+    node *par;
 };
 
 node *buildtree(int key, node *left, node *right) {
@@ -19,13 +19,13 @@ node *buildtree(int key, node *left, node *right) {
     root -> key = key;
     root -> left = left;
     root -> right = right;
-	root -> par = NULL;
-	if (root -> left != NULL) {
-		root -> left -> par = root;
-	}
-	if (root -> right != NULL) {
-		root -> right -> par = root;
-	}
+    root -> par = NULL;
+    if (root -> left != NULL) {
+        root -> left -> par = root;
+    }
+    if (root -> right != NULL) {
+	root -> right -> par = root;
+     }
 	
     return root;
 }
@@ -35,22 +35,22 @@ void printtree(node *root) {
 	
     cout<< root -> key << endl;
     if (root -> left != NULL) {
-		printtree(root -> left);
+	printtree(root -> left);
     }
-	if (root -> right != NULL) {
-		printtree(root -> right);
-	}
+    if (root -> right != NULL) {
+	printtree(root -> right);
+    }
 }
 
 void printancestors(vector<int> anc) {
-	if (anc.empty()) {
-		cout << "No ancestors found";
-	}
+     if (anc.empty()) {
+	 cout << "No ancestors found";
+     }
 	
-    for (int i = 0; i < anc.size(); i++) {
+     for (int i = 0; i < anc.size(); i++) {
         cout << anc[i] << " ";
-    }
-	cout << endl;
+     }
+     cout << endl;
 }
 
 node *dfs(int key, node *root) {
@@ -83,7 +83,7 @@ node *dfs(int key, node *root) {
 	}
 	
 	if (!found) {
-		return NULL;
+	    return NULL;
 	}
 	
 	return curr;
@@ -105,8 +105,8 @@ vector<int> findancestors(int key, node *root) {
 int lowestcommonancestor(int key1, int key2, node *root) {
     vector<int> key1ancestors = findancestors(key1, root);
     vector<int> key2ancestors = findancestors(key2, root);
-	sort(key1ancestors.begin(), key1ancestors.end());
-	sort(key2ancestors.begin(), key2ancestors.end());
+    sort(key1ancestors.begin(), key1ancestors.end());
+    sort(key2ancestors.begin(), key2ancestors.end());
 	
 	
 	int i = 0;
@@ -114,11 +114,11 @@ int lowestcommonancestor(int key1, int key2, node *root) {
 	
 	while (i < key1ancestors.size() && j < key2ancestors.size()) {
 		if (key1ancestors[i] == key2ancestors[j]) {
-            return key1ancestors[i];
-        } else if (key1ancestors[i] > key2ancestors[j]) {
-			j++;
+                    return key1ancestors[i];
+                } else if (key1ancestors[i] > key2ancestors[j]) {
+		    j++;
 		} else {
-			i++;
+		    i++;
 		}
 	}
     
@@ -126,7 +126,7 @@ int lowestcommonancestor(int key1, int key2, node *root) {
 }
 
 void testbalancedtree() {
-	node *sub1 = buildtree(3 ,buildtree(2, NULL, NULL), buildtree(4, NULL, NULL));
+    node *sub1 = buildtree(3 ,buildtree(2, NULL, NULL), buildtree(4, NULL, NULL));
     node *sub2 = buildtree(6, buildtree(5, NULL, NULL), buildtree(7, NULL, NULL));
     node *root = buildtree(9, sub1, sub2);
 	
@@ -143,7 +143,7 @@ void testbalancedtree() {
 }
 
 void testunbalancedtree() {
-	node *sub1 = buildtree(3 ,buildtree(2, NULL, NULL), NULL);
+    node *sub1 = buildtree(3 ,buildtree(2, NULL, NULL), NULL);
     node *sub2 = buildtree(6, NULL, buildtree(7, NULL, NULL));
     node *root = buildtree(9, sub1, sub2);
 	
